@@ -24,6 +24,14 @@ public class Recipe {
     }
     public LinkedList<Ingredient> ingredients;
 
+    public LinkedList<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(LinkedList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     public Recipe(){
         ingredients = new LinkedList<>();
         this.name = null;
@@ -32,7 +40,18 @@ public class Recipe {
 
     public void addIngredient(Ingredient ingredient) {
 
-        ingredients.add(ingredient);
+        boolean existingIngredient = false;
+
+        for (Ingredient ing : ingredients) {
+            if (ing.getName().equals(ingredient.getName())) {
+                ing.modifyWeight(ingredient.getWeight());
+                existingIngredient = true;
+                break;
+            }
+        }
+        if (!existingIngredient) {
+            ingredients.add(ingredient);
+        }
 
     }
 }

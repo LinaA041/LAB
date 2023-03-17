@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.InvalidNumberException;
+
 public class Ingredient {
 
     private String name;
@@ -28,12 +30,40 @@ public class Ingredient {
         this.weight = weight;
     }
 
-    public void addIngredient(String name, int weight) {
+    public  Ingredient addIngredient(String name, int weight) {
+
+        Ingredient ingredient = new Ingredient();
+        ingredient.setName(name);
+        ingredient.setWeight(weight);
+
+        return ingredient;
 
     }
 
-    public void addWeight(int weight){
+    public void addWeight(int weight) throws InvalidNumberException {
 
-        setWeight(weight);
+        if (weight < 0) {
+            throw new InvalidNumberException();
+        }
+        this.weight += weight;
+    }
+
+    public void modifyWeight(int weight) throws InvalidNumberException {
+
+        if (weight < 0) {
+            throw new InvalidNumberException();
+        }
+        this.weight = weight;
+    }
+
+
+    public void removeWeight(int weight)throws InvalidNumberException{
+
+        if(weight<0){
+
+            throw new InvalidNumberException();
+
+        }
+        this.weight -= weight;
     }
 }
